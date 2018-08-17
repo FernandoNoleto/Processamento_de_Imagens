@@ -4,7 +4,7 @@
 """Binarize (make it black and white) an image with Python."""
 
 from PIL import Image
-from scipy.misc import imsave
+# from scipy.misc import imsave
 import numpy
 
 
