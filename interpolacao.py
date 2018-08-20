@@ -145,15 +145,15 @@ def main():
     
     #vizinho mais proximo reducao
     new_img = interpolacao_vizinho_mais_proximo_reducao(img)
-    #new_img.show()
+    new_img.show()
 
     #vizinho mais proximo ampliacao
     new_img = interpolacao_vizinho_mais_proximo_ampliacao(img)
-    #new_img.show()
+    new_img.show()
 
     #bilinear reducao
     new_img = interpolacao_bilinear_reducao(img)
-    # new_img.show()
+    new_img.show()
 
     #bilinear ampliacao
     new_img = interpolacao_bilinear_ampliacao(img)
