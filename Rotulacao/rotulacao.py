@@ -21,41 +21,78 @@ def binarizar_imagem(img):
 #Retorna a rotulação da imagem
 def rotulacao(img):
     pix = img.load()
-    print(np.asarray(img.convert('L')))
+    matriz = np.asarray(img.convert('L'))
 
     # tabela = Tabela_de_rotulacao()
-    tabela = []
+    rotulos = "ABCDEFGHIJLMNOPQRSTUVXZ" 
 
     label = 0
 
-    for i in range(img.height):
-        for j in range(img.width):
-            if pix[j,i] == 0:
-                if i > 0 and j > 0:
-                    if pix[j-1, i] == 255 and pix[j, i-1] == 255:
-                        # pix[j,i] = 
-                        novo_label = Tabela_de_rotulacao(label, i, j)
+    #Dimensões
+    altura = np.size(matriz, 0)
+    largura = np.size(matriz, 1)
+
+    #Cria matriz de zeros com dimensões de imagem
+    matrizAux = np.zeros([altura,largura])
+
+    #Varredura da matriz da imagem e seta 1 ou 0 se o pixel for menor que 127
+    for i in range(altura):
+        for j in range(largura):
+            if matriz[i][j] < 127:
+                matrizAux[i][j] = 1
+            else:
+                matrizAux[i][j] = 0
+
+
+    #Cria uma matriz de char para usar na rotulação            
+    matrizString = np.chararray((altura, largura),unicode=True)
+    for i in range(altura):
+        for j in range(largura):
+            matrizString[i][j] = str(matrizAux[i][j])
+
+
+    '''
+    Aqui vai toda a lógica:
+
+    1ºCaso: Sempre a posição [0][0] da matriz se for 1 vai o primeiro Label
+    2ºCaso: Se for o pixel for igual a 1 e  uando o i for igual a zero não precisamos checar o pixel de cima ou seja olhamos só o pixel do lado
+    3ºCaso: Se for o pixel for igual a 1 e quando o j = 0 não precisamos verificar o pixel do lado pois está no inicio da primeira coluna
+    4ºCaso: O restando do caso verifica se for 1 o pixel do lado e o de cima dele se for pelo menos 1 igual repete o label
+    '''
+    for i in range(altura):
+        for j in range(largura):
+            #p = self.matriz[i][j]
+            r = j-1
+            t = i-1
+            
+            if i == 0 and j == 0: #primeira linha, primeria coluna
+                if matrizAux[i][j] == 1:
+                    matrizString[i][j] = rotulos[label]
+                    label += 1
+            elif i == 0 and matrizAux[i][j] == 1: # primeira linha, preto
+                if matrizAux[i][r] == 1:
+                    matrizString[i][j] = rotulos[label-1]
+                else:
+                    matrizString[i][j] = rotulos[label]
+                    label += 1
+            elif matrizAux[i][j] == 1: #linha > 0, preto
+                if j == 0:
+                    if matrizAux[t][j] == 1:
+                        matrizString[i][j] = rotulos[label-1]
+                    else:
+                        matrizString[i][j] = rotulos[label]
                         label += 1
-                        tabela.append(novo_label)
-                # elif pix[j-1, i] == 0 and pix[j, i-1] == 0:
-    
-    # table = tabela.c
-    for t in tabela:
-        # teste = tabela.pop()
-        print('rotulo: {}'.format(t.rotulo))
-        print('x: {}'.format(t.x))
-        print('y: {}'.format(t.y))
+                elif matrizAux[t][j] == 1 or matrizAux[i][r] == 1:
+                    matrizString[i][j] = rotulos[label-1]
+                else:
+                    matrizString[i][j] = rotulos[label]
+                    label += 1
 
-    # d = []
-    # d.
-
-
-
-
+    print(matrizString)
 def main():
     img = abrir_imagem("black_white.png")
-    img = binarizar_imagem(img)
-    img.save('binarized_img.png')
+    #img = binarizar_imagem(img)
+    #img.save('binarized_img.png')
 
     rotulacao(img)
 
