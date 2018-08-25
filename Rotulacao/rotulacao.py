@@ -3,6 +3,8 @@ import numpy as np
 
 class Tabela_de_rotulacao(object):
 
+    letra = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
+
     def __init__(self, rotulo, x, y):
         self.rotulo = rotulo
         self.x = x
