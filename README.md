@@ -16,3 +16,11 @@ $ python interpolacao.py
 $ cd Rotulacao
 $ python rotulacao.py
 ```
+
+## Para compilar o trabalho 3 (operações matemáticas) utilize o comando abaixo:
+```bash
+$ cd OperacoesMatematicas
+$ python operacoes_aritmeticas.py
+ou
+$ python operacoes_geometricas.py
+```
