@@ -73,16 +73,6 @@ def rotacao(img, theta):
     new_img.show()
             
     # x2 = math.cos(theta) * (img.width - center[0]) - math.sin(theta) * (img.height - center[1]) + 
-'''
-def espelhamento(img):
-    new_img = nova_imagem(img)
-    pix = img.load()
-    pix2 = new_img.load()
-
-    for i in range(img.height):
-        for j in range(img.width):
-            pass
-'''
 
 
 #Função que realiza a translação
@@ -140,7 +130,6 @@ def reflexao(image, eixo):
     return new_image
 
     
-
 def main():
     #gumball-rapper.jpg
     # img = abrir_imagem('gumball-rapper.jpg')
