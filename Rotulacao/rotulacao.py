@@ -27,7 +27,7 @@ def abrir_imagem(nome_img):
 
 #Converte a imagem para preto e branco
 def binarizar_imagem(img):
-    return img.convert('L')
+    return img.convert('1')
 
 def gerar_matriz (n_linhas, n_colunas):
     matriz = np.zeros((n_linhas, n_colunas), dtype=np.str)
@@ -210,9 +210,9 @@ def colorir_imagem(img, tabela_de_rotulacao):
 
 
 def main():
-    img = abrir_imagem("black_white.png")
+    img = abrir_imagem("moedas.png")
     img = binarizar_imagem(img)
-    #img.save('binarized_img.png')
+    img.save('binarized_img.png')
 
     # tabela_de_rotulacao = rotulacao(img)
 
