@@ -21,6 +21,10 @@ $ python rotulacao.py
 ```bash
 $ cd OperacoesMatematicas
 $ python operacoes_aritmeticas.py
-ou
-$ python operacoes_geometricas.py
+```
+
+## Para compilar o trabalho 5 (filtro média) utilize o comando abaixo:
+```bash
+$ cd FiltroMedia
+$ python filtromedia.py
 ```
