@@ -28,3 +28,9 @@ $ python operacoes_aritmeticas.py
 $ cd FiltroMedia
 $ python filtromedia.py
 ```
+
+## Para compilar o trabalho 6 (filtro laplaciano) utilize o comando abaixo:
+```bash
+$ cd filtroLaplaciano
+$ python filtroLaplaciano.py
+```
