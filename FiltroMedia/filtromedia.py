@@ -86,10 +86,7 @@ def main():
     print('----------------------------')
     img = filtro_media(img)
     # print(matriz_da_imagem(img))
-    img.show()
-    
-
-    
+    img.show()  
 
 if __name__ == '__main__':
     main()
