@@ -22,7 +22,7 @@ def escala_de_cinza(img):
     return img.convert('L')
 
 def menu():
-    opc = input('Qual o filtro? A | B | C | D ')
+    opc = input('Qual o filtro? A | B | C | D | E | F -> E e F são filtros de Sobel: ')
     # print (opc)
     # print (type(opc))
     return opc
@@ -30,10 +30,14 @@ def menu():
 def filtroLaplaciano(img, opc):
     # opc = menu()
     
+    #filtro laplaciano
     filtroA = [-1,-1,-1,-1,8,-1,-1,-1,-1]
     filtroB = [1,1,1,1,-8,1,1,1,1]
     filtroC = [0,-1,0,-1,4,-1,0,-1,0]
     filtroD = [0,1,0,1,-4,1,0,1,0]
+    #Filtro de sobel
+    filtroE = [-1,-2,-1,0,0,0,1,2,1]
+    filtroF = [-1,0,1,-2,0,2,-1,0,1]
     
     new_img = Image.new('L', (img.width, img.height), color = 'black')
     pix = img.load()
@@ -112,6 +116,46 @@ def filtroLaplaciano(img, opc):
                             pix[i+2,j]   * filtroD[6] +
                             pix[i+2,j+1] * filtroD[7] +
                             pix[i+2,j+2] * filtroD[8]) /9)
+                if valor < 0:
+                    new_pix[i+1,j+1] = 0
+                elif valor > 255:
+                    new_pix[i+1,j+1] = 255
+                else:
+                    new_pix[i+1,j+1] = valor
+    
+    #Se o for o filtro E
+    elif opc == 'e' or opc == 'E':
+        for i in range(img.height - 2):
+            for j in range(img.width - 2):
+                valor = int((pix[i,j]    * filtroE[0] +
+                            pix[i,j+1]   * filtroE[1] +
+                            pix[i,j+2]   * filtroE[2] +
+                            pix[i+1,j]   * filtroE[3] +
+                            pix[i+1,j+1] * filtroE[4] +
+                            pix[i+1,j+2] * filtroE[5] +
+                            pix[i+2,j]   * filtroE[6] +
+                            pix[i+2,j+1] * filtroE[7] +
+                            pix[i+2,j+2] * filtroE[8]) /9)
+                if valor < 0:
+                    new_pix[i+1,j+1] = 0
+                elif valor > 255:
+                    new_pix[i+1,j+1] = 255
+                else:
+                    new_pix[i+1,j+1] = valor
+    
+    #Se o for o filtro F
+    elif opc == 'f' or opc == 'F':
+        for i in range(img.height - 2):
+            for j in range(img.width - 2):
+                valor = int((pix[i,j]    * filtroF[0] +
+                            pix[i,j+1]   * filtroF[1] +
+                            pix[i,j+2]   * filtroF[2] +
+                            pix[i+1,j]   * filtroF[3] +
+                            pix[i+1,j+1] * filtroF[4] +
+                            pix[i+1,j+2] * filtroF[5] +
+                            pix[i+2,j]   * filtroF[6] +
+                            pix[i+2,j+1] * filtroF[7] +
+                            pix[i+2,j+2] * filtroF[8]) /9)
                 if valor < 0:
                     new_pix[i+1,j+1] = 0
                 elif valor > 255:
