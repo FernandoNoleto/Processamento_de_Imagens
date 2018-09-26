@@ -22,7 +22,7 @@ def escala_de_cinza(img):
     return img.convert('L')
 
 def menu():
-    opc = input('Qual o filtro? A | B | C | D ')
+    opc = input('Qual o filtro? A | B | C | D | SA | SB')
     # print (opc)
     # print (type(opc))
     return opc
@@ -34,6 +34,8 @@ def filtroLaplaciano(img, opc):
     filtroB = [1,1,1,1,-8,1,1,1,1]
     filtroC = [0,-1,0,-1,4,-1,0,-1,0]
     filtroD = [0,1,0,1,-4,1,0,1,0]
+    filtroSobelA = [-1,-2,-1,0,0,0,1,2,1]
+    filtroSobelB = [-1,0,1,-2,0,2,-1,0,1]
     
     new_img = Image.new('L', (img.width, img.height), color = 'black')
     pix = img.load()
@@ -112,6 +114,46 @@ def filtroLaplaciano(img, opc):
                             pix[i+2,j]   * filtroD[6] +
                             pix[i+2,j+1] * filtroD[7] +
                             pix[i+2,j+2] * filtroD[8]) /9)
+                if valor < 0:
+                    new_pix[i+1,j+1] = 0
+                elif valor > 255:
+                    new_pix[i+1,j+1] = 255
+                else:
+                    new_pix[i+1,j+1] = valor
+    
+    #Se o for o filtro SobelA                
+    elif opc == 'sa' or opc == 'SA':
+        for i in range(img.height - 2):
+            for j in range(img.width - 2):
+                valor = int((pix[i,j]     * filtroSobelA[0] +
+                            pix[i,j+1]   * filtroSobelA[1] +
+                            pix[i,j+2]   * filtroSobelA[2] +
+                            pix[i+1,j]   * filtroSobelA[3] +
+                            pix[i+1,j+1] * filtroSobelA[4] +
+                            pix[i+1,j+2] * filtroSobelA[5] +
+                            pix[i+2,j]   * filtroSobelA[6] +
+                            pix[i+2,j+1] * filtroSobelA[7] +
+                            pix[i+2,j+2] * filtroSobelA[8]) /9)
+                if valor < 0:
+                    new_pix[i+1,j+1] = 0
+                elif valor > 255:
+                    new_pix[i+1,j+1] = 255
+                else:
+                    new_pix[i+1,j+1] = valor
+    
+    #Se o for o filtro SobelB
+    elif opc == 'sb' or opc == 'SB':
+        for i in range(img.height - 2):
+            for j in range(img.width - 2):
+                valor = int((pix[i,j]     * filtroSobelB[0] +
+                            pix[i,j+1]   * filtroSobelB[1] +
+                            pix[i,j+2]   * filtroSobelB[2] +
+                            pix[i+1,j]   * filtroSobelB[3] +
+                            pix[i+1,j+1] * filtroSobelB[4] +
+                            pix[i+1,j+2] * filtroSobelB[5] +
+                            pix[i+2,j]   * filtroSobelB[6] +
+                            pix[i+2,j+1] * filtroSobelB[7] +
+                            pix[i+2,j+2] * filtroSobelB[8]) /9)
                 if valor < 0:
                     new_pix[i+1,j+1] = 0
                 elif valor > 255:

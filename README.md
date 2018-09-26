@@ -29,7 +29,7 @@ $ cd FiltroMedia
 $ python filtromedia.py
 ```
 
-## Para compilar o trabalho 6 (filtro laplaciano) utilize o comando abaixo:
+## Para compilar o trabalho 6 (filtro laplaciano e Filtro Sobel) utilize o comando abaixo:
 ```bash
 $ cd filtroLaplaciano
 $ python filtroLaplaciano.py
