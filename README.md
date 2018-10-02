@@ -29,8 +29,14 @@ $ cd FiltroMedia
 $ python filtromedia.py
 ```
 
-## Para compilar o trabalho 6 (filtro laplaciano) utilize o comando abaixo:
+## Para compilar o trabalho 6 (filtro laplaciano e Filtro Sobel) utilize o comando abaixo:
 ```bash
 $ cd filtroLaplaciano
 $ python filtroLaplaciano.py
+```
+
+## Para compilar o trabalho 7 (Erosão e Dilatação de Imagens) utilize o comando abaixo:
+```bash
+$ cd Dilatacao\&Erosao
+$ python python dilatacao\&erosao.py dilatacao|erosao nomeDaImagem
 ```
