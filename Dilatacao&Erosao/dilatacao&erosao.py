@@ -80,6 +80,32 @@ def erosao(img):
 
     return img
 
+def abertura(img):
+    img = erosao(img)
+    img = dilatacao(img)
+    return img
+
+def fechamento(img):
+    #img = binarizar_imagem(img)
+    img = dilatacao(img)
+    img = erosao(img)
+    return img
+
+def extracaoContorno(img):
+    new_img = Image.new('L', (img.width, img.height), color = 'black')
+    imgOriginal = converter_para_escala_de_cinza(img)
+    img = binarizar_imagem(img)
+    imgErosao = erosao(img)
+    pixOriginal = imgOriginal.load()
+    pixErosao = imgErosao.load()
+    pixNovo = new_img.load()
+
+    for i in range(imd.height):
+        for j in range(img.width):
+            pixNovo[i][j] = pixOriginal[i][j] - pixErosao[i][j]
+
+    return new_img
+
 def main(operacao, nome_da_imagem):
     
     # img = abrir_imagem('word.png')
@@ -94,6 +120,12 @@ def main(operacao, nome_da_imagem):
         img = dilatacao(img)
     elif operacao == 'erosao':
         img = erosao(img)
+    elif operacao == 'abertura':
+        img = abertura(img)
+    elif operacao == 'fechamento':
+        img = fechamento(img)
+    elif operacao == 'extracaoContorno':
+        imgExtracao = extracaoContorno(img)
     else:
         print("Algo deu errado!")
     img.show()
@@ -103,7 +135,7 @@ def main(operacao, nome_da_imagem):
 
 if __name__ == '__main__':
     # main()
-    if len(sys.argv) < 3 or (sys.argv[1] != 'dilatacao' and sys.argv[1] != 'erosao'):
+    if len(sys.argv) < 3 or (sys.argv[1] != 'dilatacao' and sys.argv[1] != 'erosao' and sys.argv[1] != 'abertura' and sys.argv[1] != 'fechamento' and sys.argv[1] != 'extracaoContorno'):
         print("Execute assim: 'python dilatacao\&erosao.py dilatacao|erosao nomeDaImagem'")
     else:
         main(sys.argv[1], sys.argv[2])
