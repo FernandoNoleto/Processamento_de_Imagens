@@ -100,9 +100,9 @@ def extracaoContorno(img):
     pixErosao = imgErosao.load()
     pixNovo = new_img.load()
 
-    for i in range(imd.height):
-        for j in range(img.width):
-            pixNovo[i][j] = pixOriginal[i][j] - pixErosao[i][j]
+    for j in range(img.height):
+        for i in range(img.width):
+            pixNovo[i,j] = pixOriginal[i,j] - pixErosao[i,j]
 
     return new_img
 
@@ -125,7 +125,7 @@ def main(operacao, nome_da_imagem):
     elif operacao == 'fechamento':
         img = fechamento(img)
     elif operacao == 'extracaoContorno':
-        imgExtracao = extracaoContorno(img)
+        img = extracaoContorno(img)
     else:
         print("Algo deu errado!")
     img.show()
