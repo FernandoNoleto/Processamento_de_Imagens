@@ -50,34 +50,13 @@ def dilatacao(img):
     width, height = img.size
     for j, i in product(range(height-1), range(width-1)):
         if i > 0 and j > 0:
-            if pix[i,j] == 255:
+            if pix[i-1,j] == 255 or pix[i+1, j] == 255 or pix[i,j+1] == 255 or pix[i,j-1] == 255:
                 pixels_to_paint.append(Pixel(i,j))
-                # pix[i-1,j] = 255
-                # pix[i+1,j] = 255
-                # pix[i,j-1] = 255
-                # pix[i,j+1] = 255
-                # pix[i-1,j-1] = 255
-                # pix[i+1,j+1] = 255
-                # pix[i-1,j+1] = 255
-                # pix[i+1,j-1] = 255
     
-    print(pixels_to_paint.__len__())
-
-    for k in pixels_to_paint:
-        # print('x: {} y: {}'.format(pixels_to_paint.pop().x, pixels_to_paint.pop().y))
-        
-        # coluna linha
-        pix[pixels_to_paint.pop().x-1, pixels_to_paint.pop().y] = 255 #esquerda
-        pix[pixels_to_paint.pop().x+1, pixels_to_paint.pop().y] = 255 #direita
-        pix[pixels_to_paint.pop().x, pixels_to_paint.pop().y-1] = 255 #em cima
-        pix[pixels_to_paint.pop().x, pixels_to_paint.pop().y+1] = 255 #em baixo
-        
-        pix[pixels_to_paint.pop().x-1, pixels_to_paint.pop().y-1] = 255 #em cima e esquerda
-        pix[pixels_to_paint.pop().x+1, pixels_to_paint.pop().y+1] = 255 #em baixo e direita
-        pix[pixels_to_paint.pop().x-1, pixels_to_paint.pop().y+1] = 255 #em baixo e esquerda
-        pix[pixels_to_paint.pop().x+1, pixels_to_paint.pop().y-1] = 255 #em cima e direita
-
-
+    for p in pixels_to_paint:
+        # p = pixels_to_paint.pop()
+        pix[p.x, p.y] = 255
+    
     return img
 
 def erosao(img):
@@ -88,27 +67,15 @@ def erosao(img):
     width, height = img.size
     for j, i in product(range(height-1), range(width-1)):
         if i > 0 and j > 0:
-            if pix[i,j] == 255:
+            if pix[i-1,j] == 255 and pix[i+1, j] == 255 and pix[i,j+1] == 255 and pix[i,j-1] == 255:
                 pixels_to_paint.append(Pixel(i,j))
-
     
-    print(pixels_to_paint.__len__())
-
-    for k in pixels_to_paint:
-        # print('x: {} y: {}'.format(pixels_to_paint.pop().x, pixels_to_paint.pop().y))
-        
-        # coluna linha
-        pix[pixels_to_paint.pop().x-1, pixels_to_paint.pop().y] = 0 #esquerda
-        pix[pixels_to_paint.pop().x+1, pixels_to_paint.pop().y] = 0 #direita
-        pix[pixels_to_paint.pop().x, pixels_to_paint.pop().y-1] = 0 #em cima
-        pix[pixels_to_paint.pop().x, pixels_to_paint.pop().y+1] = 0 #em baixo
-        
-        pix[pixels_to_paint.pop().x-1, pixels_to_paint.pop().y-1] = 0 #em cima e esquerda
-        pix[pixels_to_paint.pop().x+1, pixels_to_paint.pop().y+1] = 0 #em baixo e direita
-        pix[pixels_to_paint.pop().x-1, pixels_to_paint.pop().y+1] = 0 #em baixo e esquerda
-        pix[pixels_to_paint.pop().x+1, pixels_to_paint.pop().y-1] = 0 #em cima e direita
-
-
+    for j, i in product(range(height), range(width)):
+        pix[i,j] = 0
+    
+    for p in pixels_to_paint:
+        # p = pixels_to_paint.pop()
+        pix[p.x, p.y] = 255
 
 
     return img
